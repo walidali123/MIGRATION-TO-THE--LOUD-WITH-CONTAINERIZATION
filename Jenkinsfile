@@ -11,11 +11,7 @@ pipeline {
 
         stage("test") {
 
-            when {
-                expression {
-                    BRANCH_NAME == 'dev' && CODE_CHANGES == true
-                }
-            }
+            
             steps{
                 echo " testing the application"
             }
