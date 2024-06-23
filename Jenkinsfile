@@ -5,19 +5,17 @@ pipeline {
     agent any
     environment {
         NEW_VERSION = '1.3.0'
+        SERVER_CREDENTIALS = credentials('docker_hub_repo')
     }
+   
 
     stages {
 
         stage("test") {
 
-            when {
-                expression {
-                    BRANCH_NAME == 'dev' && CODE_CHANGES == true
-                }
-            }
+            
             steps{
-                echo " testing the application"
+                echo " testing the application ${NEW_VERSION}"
             }
         }
 
@@ -32,9 +30,16 @@ pipeline {
             steps {
                 script {
                      echo "deploying the image"
+                     withCredentials([
+                        usernamePassword(credentials: 'docker_hub_repo', usernameVariable: USER, passwordVariable: PWD )
+
+                     ]) {
+
+                     }
                 }
             }
         }
     }
 }
+
 
