@@ -6,6 +6,7 @@ pipeline {
     environment {
         NEW_VERSION = '1.3.0'
     }
+   
 
     stages {
 
@@ -13,7 +14,7 @@ pipeline {
 
             
             steps{
-                echo " testing the application"
+                echo " testing the application ${NEW_VERSION}"
             }
         }
 
