@@ -1,3 +1,7 @@
+def testApp() {
+    echo "testing the application"
+}
+
 def buildApp() {
     echo "Building the docker image version ${params.VERSION}"
     withCredentials([usernamePassword(credentialsId: 'docker_hub_repo', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
@@ -7,11 +11,7 @@ def buildApp() {
                     }
 }
 
-def testApp() {
-    echo "testing the application"
-}
-
-def deploydApp() {
+def deployApp() {
    echo "Deploying the image"
 }
 return this
