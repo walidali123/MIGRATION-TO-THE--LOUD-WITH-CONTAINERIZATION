@@ -1,9 +1,6 @@
 #!/usr/bin/env groovy
 
-#!/usr/bin/env groovy
-
 def gv
-
 
 pipeline {
     agent any
@@ -24,7 +21,7 @@ pipeline {
             steps {
                 script {
                     gv = load "script.groovy"
-                    gv.testdApp()
+                    gv.testApp()
                 }
             }
         }
@@ -32,19 +29,20 @@ pipeline {
             steps {
                 script {
                     gv.buildApp()
+                    withCredentials([usernamePassword(credentialsId: 'docker_hub_repo', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
+                        sh "docker build -t walidali123/my-repo:${params.VERSION} ."
+                        sh "echo \$PWD | docker login -u \$USER --password-stdin"
+                        sh "docker push walidali123/my-repo:${params.VERSION}"
+                    }
                 }
             }
         }
         stage("deploy") {
             steps {
                 script {
-                    gv.deploydApp() 
-                    withCredentials([usernamePassword(credentialsId: 'docker_hub_repo', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
-                        sh "echo some script \${USER} \${PWD}"
-                    }
+                    gv.deployApp() 
                 }
             }
         }
     }
 }
-

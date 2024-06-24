@@ -1,8 +1,8 @@
 def buildApp() {
-    echo "Building the image version ${params.VERSION}"
+    echo "Building the docker image version ${params.VERSION}"
 }
 
-def testdApp() {
+def testApp() {
     echo "testing the application"
 }
 
