@@ -31,11 +31,7 @@ pipeline {
             steps {
                 script {
                     gv.buildApp()
-                    withCredentials([usernamePassword(credentialsId: 'docker_hub_repo', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
-                        sh "docker build -t walidali123/my-repo:${params.VERSION} ."
-                        sh "echo \$PWD | docker login -u \$USER --password-stdin"
-                        sh "docker push walidali123/my-repo:${params.VERSION}"
-                    }
+                 
                 }
             }
         }
