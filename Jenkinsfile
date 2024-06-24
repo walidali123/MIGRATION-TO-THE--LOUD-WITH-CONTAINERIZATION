@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     gv = load "script.groovy"
-                    gv.testdApp()
+                    gv.testApp()
                 }
             }
         }
