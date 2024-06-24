@@ -1,6 +1,9 @@
 #!/usr/bin/env groovy
 
+#!/usr/bin/env groovy
+
 def gv
+
 
 pipeline {
     agent any
@@ -44,3 +47,4 @@ pipeline {
         }
     }
 }
+
