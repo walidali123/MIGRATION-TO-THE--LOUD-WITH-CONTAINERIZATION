@@ -1,5 +1,5 @@
 #!#!/usr/bin/env groovy
-
+def gv
 pipeline {
     agent any
     parameters {
@@ -18,13 +18,14 @@ pipeline {
                 }
             }
             steps {
-                echo "Testing the application ${params.VERSION}"
+                gv = load "script.groovy"
+
             }
         }
         stage("build image") {
             steps {
                 script {
-                    echo "Building the image version ${params.VERSION}"
+                    gv.buildApp()
                 }
             }
         }
