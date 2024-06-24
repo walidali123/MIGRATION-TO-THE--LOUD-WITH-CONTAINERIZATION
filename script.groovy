@@ -2,7 +2,7 @@ def buildApp() {
     echo "Building the image version ${params.VERSION}"
 }
 
-def testdApp() {
+def testApp() {
     echo "testing the application"
 }
 
