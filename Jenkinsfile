@@ -25,14 +25,14 @@ pipeline {
        
             
             steps{
-                echo " testing the application ${NEW_VERSION}"
+                echo " testing the application ${params.VERSION}"
             }
         }
 
         stage("build image") {
             steps {
                 script {
-                    echo " building the image version ${NEW_VERSION} "
+                    echo " building the image version ${params.VERSION} "
                 }
             }
         }
