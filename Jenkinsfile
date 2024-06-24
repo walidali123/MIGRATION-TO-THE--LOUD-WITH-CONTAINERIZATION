@@ -1,5 +1,7 @@
-#!#!/usr/bin/env groovy
+#!/usr/bin/env groovy
+
 def gv
+
 pipeline {
     agent any
     parameters {
@@ -7,7 +9,6 @@ pipeline {
         booleanParam(name: 'executeTest', defaultValue: true, description: '')
     }
     environment {
-        
         SERVER_CREDENTIALS = credentials('docker_hub_repo')
     }
     stages {
@@ -18,8 +19,9 @@ pipeline {
                 }
             }
             steps {
-                gv = load "script.groovy"
-
+                script {
+                    gv = load "script.groovy"
+                }
             }
         }
         stage("build image") {
@@ -41,3 +43,4 @@ pipeline {
         }
     }
 }
+
