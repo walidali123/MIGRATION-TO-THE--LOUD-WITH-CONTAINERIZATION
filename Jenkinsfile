@@ -31,16 +31,32 @@ pipeline {
             steps {
                 script {
                     gv.buildApp()
-                 
                 }
             }
         }
         stage("deploy") {
             steps {
                 script {
-                    gv.deployApp() 
+                    gv.deployApp()
                 }
             }
         }
     }
+    
+    post {
+        success {
+            echo "Pipeline succeeded! Deployed version ${params.VERSION}"
+        }
+        failure {
+            echo "Pipeline failed! There were errors."
+        }
+        always {
+            echo "Cleaning up Docker images on Jenkins server"
+            cleanDockerImages()
+        }
+    }
+}
+
+def cleanDockerImages() {
+    sh 'docker image prune -af'
 }
